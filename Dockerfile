@@ -1,8 +1,8 @@
 FROM php:8.1-fpm
 
-# Arguments defined in docker-compose.yml
-ARG user
-ARG uid
+# set your user name, ex: user=carlos
+ARG user=cuelho
+ARG uid=1000
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \

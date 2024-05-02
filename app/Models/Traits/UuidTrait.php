@@ -10,7 +10,7 @@ trait UuidTrait
     public static function booted()
     {
         //Como esta sendo usado uuid como chave primaria no BD
-        //Cria uma chave "primaria" uuid automatica
+        //Cria uma chave "primaria" uuid automatica ao criar algum item
         static::creating(function ($model) {
             $model->{$model->getKeyName()} = (string) Str::uuid();
         });

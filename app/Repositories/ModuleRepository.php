@@ -2,27 +2,30 @@
 
 namespace App\Repositories;
 
-use App\Models\Course;
+use App\Models\Module;
 
 /**
  * Repository montado com proposito de gerir querys complexas
  * bem como facilitar o manuseio e separação dos códigos e evolução do sistema
  */
 
-class CourseRepository
+class ModuleRepository
 {
     protected $entity;
 
-    public function __construct(Course $model) {
+    public function __construct(Module $model) {
         $this->entity = $model;
     }
 
-    public function getAllCourses()
+    public function getModulesByCourseId(string $identify)
     {
-        return $this->entity->get();
+        return $this->entity
+            ->where('course_id', $identify)
+            ->with('course')
+            ->get();
     }
 
-    public function getCourse(string $identify)
+    public function getModule(string $identify)
     {
         return $this->entity->findOrFail($identify);
     }

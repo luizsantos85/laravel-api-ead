@@ -21,7 +21,7 @@ class ModuleFactory extends Factory
         $courseIds = Course::pluck('id')->toArray();
 
         return [
-            'name' => $this->faker->unique()->name(),
+            'name' => $this->faker->name(),
             'course_id' => $this->faker->randomElement($courseIds),
         ];
     }

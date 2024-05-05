@@ -25,8 +25,8 @@ class ModuleRepository
             ->get();
     }
 
-    public function getModule(string $identify)
-    {
-        return $this->entity->findOrFail($identify);
-    }
+    // public function getModule(string $identify)
+    // {
+    //     return $this->entity->findOrFail($identify);
+    // }
 }

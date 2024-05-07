@@ -3,6 +3,7 @@
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\ModuleController;
+use App\Http\Controllers\SupportController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -28,6 +29,8 @@ Route::get('/course/{id}/modules',[ModuleController::class, 'index']);
 
 Route::get('/module/{id}/lessons',[LessonController::class, 'index']);
 Route::get('/lesson/{id}',[LessonController::class, 'show']);
+
+Route::get('/supports',[SupportController::class, 'index']);
 
 
 Route::get('/', function(){

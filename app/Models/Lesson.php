@@ -19,4 +19,9 @@ class Lesson extends Model
     {
         return $this->belongsTo(Module::class, 'module_id', 'id');
     }
+
+    public function supports()
+    {
+        return $this->hasMany(Support::class, 'lesson_id', 'id');
+    }
 }

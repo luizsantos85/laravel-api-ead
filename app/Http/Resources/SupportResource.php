@@ -16,7 +16,7 @@ class SupportResource extends JsonResource
     {
         return [
             'status' => $this->status,
-            'status_label' => $this->statusOptions[$this->status],
+            'status_label' => $this->statusOptions[$this->status] ?? 'Not found status',
             'description' => $this->description,
             // 'user' => $this->user->name,
             // 'lesson' => $this->lesson->name,

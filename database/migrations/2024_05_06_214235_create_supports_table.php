@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('supports', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->enum('status', ['A', 'P', 'F'])->default('P'); //A->aberto, P->pendente, F-> finalizado
-            $table->string('description');
+            $table->text('description');
             $table->foreignUuid('user_id')->constrained('users');
             $table->foreignUuid('lesson_id')->constrained('lessons');
             $table->timestamps();

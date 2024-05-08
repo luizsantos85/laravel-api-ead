@@ -16,7 +16,7 @@ class SupportRepository
     public function getSupportsAll(array $filters = [])
     {
         $user = $this->getUserAuth();
-        
+
         return $this->entity->with('lesson', 'user')
             ->when(isset($filters['lesson']), function ($query) use ($filters) {
                 $query->where('lesson_id', $filters['lesson']);
@@ -50,5 +50,18 @@ class SupportRepository
     {
         // return auth()->user();
         return User::first();
+    }
+
+    public function createNewSupport(array $data): Support
+    {
+        $support = $this->getUserAuth()
+            ->supports()
+            ->create([
+                'status' => $data['status'],
+                'lesson_id' => $data['lesson'],
+                'description' => $data['description'],
+            ]);
+
+        return $support;
     }
 }

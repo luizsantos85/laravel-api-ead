@@ -18,8 +18,10 @@ class SupportResource extends JsonResource
             'status' => $this->status,
             'status_label' => $this->statusOptions[$this->status],
             'description' => $this->description,
-            'user' => $this->user->name,
-            'lesson' => $this->lesson->name,
+            // 'user' => $this->user->name,
+            // 'lesson' => $this->lesson->name,
+            'user' => new UserResource($this->user),
+            'lesson' => new LessonResource($this->lesson),
         ];
     }
 }

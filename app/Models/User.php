@@ -50,4 +50,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Support::class, 'user_id', 'id');
     }
+
+    public function replies()
+    {
+        return $this->hasMany(ReplySupport::class, 'user_id', 'id');
+    }
 }

@@ -33,4 +33,9 @@ class Support extends Model
     {
         return $this->belongsTo(Lesson::class, 'lesson_id', 'id');
     }
+
+    public function replies()
+    {
+        return $this->hasMany(ReplySupport::class, 'support_id', 'id');
+    }
 }

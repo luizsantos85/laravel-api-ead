@@ -21,12 +21,13 @@ class ModuleRepository
     {
         return $this->entity
             ->where('course_id', $identify)
-            ->with('course')
+            // ->with('lessons.views')
+            ->with('lessons')
             ->get();
     }
 
     // public function getModule(string $identify)
     // {
-    //     return $this->entity->findOrFail($identify);
+    //     return $this->entity->with('lessons.views')->findOrFail($identify);
     // }
 }

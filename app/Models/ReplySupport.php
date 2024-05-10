@@ -22,6 +22,7 @@ class ReplySupport extends Model
         'user_id'
     ];
 
+    protected $touches = ['support'];
 
     public function support()
     {

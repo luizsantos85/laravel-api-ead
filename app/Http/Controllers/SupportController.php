@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreReplySupportRequest;
 use App\Http\Requests\StoreSupportRequest;
-use App\Http\Resources\ReplyResource;
 use App\Http\Resources\SupportResource;
 use App\Repositories\SupportRepository;
 use Illuminate\Http\Request;
@@ -13,9 +11,9 @@ class SupportController extends Controller
 {
     protected $repository;
 
-    public function __construct(SupportRepository $lessonRepository)
+    public function __construct(SupportRepository $supportRepository)
     {
-        $this->repository = $lessonRepository;
+        $this->repository = $supportRepository;
     }
 
     public function index(Request $request)
@@ -32,11 +30,5 @@ class SupportController extends Controller
         return new SupportResource($support);
     }
 
-    public function createReply($id, StoreReplySupportRequest $request)
-    {
-        $reply = $this->repository->createReplySupport($id, $request->validated());
-
-        return new ReplyResource($reply);
-    }
 
 }

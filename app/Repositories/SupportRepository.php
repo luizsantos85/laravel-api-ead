@@ -3,10 +3,12 @@
 namespace App\Repositories;
 
 use App\Models\Support;
-use App\Models\User;
+use App\Repositories\Traits\RepositoryTrait;
 
 class SupportRepository
 {
+    use RepositoryTrait;
+
     protected $entity;
 
     public function __construct(Support $model) {
@@ -31,17 +33,11 @@ class SupportRepository
                 $query->where('user_id', $user->id);
             })
             ->with('replies','user','lesson')
+            ->orderByDesc('updated_at')
             ->get();
     }
 
-    private function getUserAuth(): User
-    {
-        // return auth()->user();
-        return User::first();
-    }
-
-
-    public function getSupport(string $identify)
+    private function getSupport(string $identify)
     {
         return $this->entity->findOrFail($identify);
     }
@@ -57,21 +53,5 @@ class SupportRepository
             ]);
 
         return $support;
-    }
-
-
-    public function createReplySupport(string $identify, array $data)
-    {
-        $user = $this->getUserAuth();
-
-        $reply = $this->getSupport($identify)
-            ->replies()
-            ->create([
-                'description' => $data['description'],
-                'user_id' => $user->id
-            ]);
-
-        return $reply;
-
     }
 }

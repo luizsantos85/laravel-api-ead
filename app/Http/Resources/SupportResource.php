@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class SupportResource extends JsonResource
@@ -19,6 +20,7 @@ class SupportResource extends JsonResource
             'status' => $this->status,
             'status_label' => $this->statusOptions[$this->status] ?? 'Not found status',
             'description' => $this->description,
+            'date_update' => Carbon::make($this->updated_at)->format('d/m/Y H:i:s'),
             'user' => new UserResource($this->user),
             'lesson' => new LessonResource($this->whenLoaded('lesson')),
             'replies' => ReplyResource::collection($this->whenLoaded('replies')),

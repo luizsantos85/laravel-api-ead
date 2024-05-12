@@ -11,8 +11,15 @@ class SupportRepository
 
     protected $entity;
 
-    public function __construct(Support $model) {
+    public function __construct(Support $model)
+    {
         $this->entity = $model;
+    }
+
+    public function getSupportsUser(array $filters = [])
+    {
+        $filters['users'] = true;
+        return $this->getSupportsAll($filters);
     }
 
     public function getSupportsAll(array $filters = [])
@@ -32,7 +39,7 @@ class SupportRepository
                 $user = $this->getUserAuth();
                 $query->where('user_id', $user->id);
             })
-            ->with('replies','user','lesson')
+            ->with('replies', 'user', 'lesson')
             ->orderByDesc('updated_at')
             ->get();
     }

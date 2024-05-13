@@ -18,7 +18,7 @@ class SupportRepository
 
     public function getSupportsUser(array $filters = [])
     {
-        $filters['users'] = true;
+        $filters['user'] = true;
         return $this->getSupportsAll($filters);
     }
 

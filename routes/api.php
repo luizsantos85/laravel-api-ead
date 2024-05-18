@@ -36,6 +36,10 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/supports/user',[SupportController::class, 'supportsUser']);
 
     Route::post('/support/reply',[ReplySupportController::class, 'createReply']);
+
+    Route::post('/logout', [AuthController::class, 'logout']);
+    Route::get('/profile', [AuthController::class, 'profile']);
+
 });
 
 Route::get('/', function(){

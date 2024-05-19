@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\ModuleController;
+use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\SupportController;
 use App\Http\Controllers\ReplySupportController;
 
@@ -19,7 +20,8 @@ use App\Http\Controllers\ReplySupportController;
 |
 */
 
-
+Route::post('/auth/password-forgot', [PasswordResetController::class, 'sendResetLink'])->middleware('guest');
+Route::post('/auth/password-reset', [PasswordResetController::class, 'resetPassword'])->middleware('guest');
 Route::post('/auth', [AuthController::class, 'auth']);
 
 Route::middleware(['auth:sanctum'])->group(function () {

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Traits\UuidTrait;
+use App\Notifications\ResetPasswordNotification;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -47,6 +48,18 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+
+    /**
+     * Sobrescreve notificação reset de senha
+     *
+     * @param string $token
+     * @return void
+     */
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new ResetPasswordNotification($token));
+    }
+
     public function supports()
     {
         return $this->hasMany(Support::class, 'user_id', 'id');
@@ -56,4 +69,6 @@ class User extends Authenticatable
     {
         return $this->hasMany(ReplySupport::class, 'user_id', 'id');
     }
+
+
 }

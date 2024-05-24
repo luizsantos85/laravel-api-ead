@@ -24,4 +24,14 @@ class Lesson extends Model
     {
         return $this->hasMany(Support::class, 'lesson_id', 'id');
     }
+
+    public function views()
+    {
+        return $this->hasMany(View::class, 'lesson_id', 'id')
+            ->where(function($query){
+                if(auth()->check()){
+                    return $query->where('user_id', auth()->user()->id);
+                }
+            });
+    }
 }

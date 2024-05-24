@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreViewRequest;
 use App\Http\Resources\LessonResource;
 use App\Repositories\LessonRepository;
 use Illuminate\Http\Request;
@@ -23,5 +24,12 @@ class LessonController extends Controller
     public function show($lessonId)
     {
         return new LessonResource($this->repository->getLesson($lessonId));
+    }
+
+    public function viewed(StoreViewRequest $request)
+    {
+        $this->repository->markLessonViewed($request->lesson);
+
+        return response()->json(['success' => true]);
     }
 }

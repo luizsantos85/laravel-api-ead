@@ -33,6 +33,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/module/{id}/lessons',[LessonController::class, 'index']);
     Route::get('/lesson/{id}',[LessonController::class, 'show']);
 
+    Route::post('/lesson/viewed',[LessonController::class, 'viewed']);
+
     Route::get('/supports',[SupportController::class, 'index']);
     Route::post('/support',[SupportController::class, 'store']);
     Route::get('/supports/user',[SupportController::class, 'supportsUser']);

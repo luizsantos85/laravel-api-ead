@@ -70,5 +70,10 @@ class User extends Authenticatable
         return $this->hasMany(ReplySupport::class, 'user_id', 'id');
     }
 
+    public function views()
+    {
+        return $this->hasMany(View::class, 'user_id', 'id');
+    }
+
 
 }

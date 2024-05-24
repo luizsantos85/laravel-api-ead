@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Lesson;
+use App\Repositories\Traits\RepositoryTrait;
 
 /**
  * Repository montado com proposito de gerir querys complexas
@@ -11,6 +12,8 @@ use App\Models\Lesson;
 
 class LessonRepository
 {
+    use RepositoryTrait;
+
     protected $entity;
 
     public function __construct(Lesson $model) {
@@ -28,5 +31,22 @@ class LessonRepository
     public function getLesson(string $identify)
     {
         return $this->entity->findOrFail($identify);
+    }
+
+    public function markLessonViewed(string $identify)
+    {
+        $user = $this->getUserAuth();
+
+        $view = $user->views()->where('lesson_id', $identify)->first();
+
+        if($view){
+            return $view->update([
+                "qtd" => $view->qtd + 1,
+            ]);
+        }
+
+        return $user->views()->create([
+            'lesson_id' => $identify
+        ]);
     }
 }

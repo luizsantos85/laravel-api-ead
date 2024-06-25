@@ -11,7 +11,7 @@ class CourseTest extends TestCase
 {
     use UtilsTraitToken;
 
-    public function test_unauthenticated()
+    public function test_course_unauthenticated()
     {
         $response = $this->getJson('/courses');
         $response->assertStatus(401);

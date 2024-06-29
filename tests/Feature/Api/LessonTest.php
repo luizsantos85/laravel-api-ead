@@ -11,7 +11,7 @@ use Tests\TestCase;
 
 class LessonTest extends TestCase
 {
-    use UtilsTraitToken;
+    use UtilsTraitToken, UtilsTraitLessonCreate;
 
     public function test_lesson_unauthenticated()
     {
@@ -69,13 +69,7 @@ class LessonTest extends TestCase
 
     public function test_get_lesson_show()
     {
-        $course = Course::factory()->create();
-        $module = Module::factory()->create([
-            'course_id' => $course->id
-        ]);
-        $lesson = Lesson::factory()->create([
-            'module_id' => $module->id
-        ]);
+        $lesson = $this->createLesson();
 
         $response = $this->getJson("/lesson/{$lesson->id}", $this->defaultHeaders());
         $response->assertStatus(200);

@@ -80,5 +80,33 @@ class SupportTest extends TestCase
             ->assertJsonCount(10, 'data');
     }
 
+    public function test_create_support_unauthenticated()
+    {
+        $response = $this->postJson('/support');
+        $response->assertStatus(401);
+    }
+
+    public function test_create_support_error_validated()
+    {
+        $response = $this->postJson('/support',[], $this->defaultHeaders());
+        $response->assertStatus(422);
+    }
+
+    public function test_create_support()
+    {
+        $lesson = $this->createLesson();
+
+        $payload = [
+            'lesson' => $lesson->id,
+            'status' => 'P',
+            'description' => 'testeeee'
+        ];
+
+        $response = $this->postJson('/support',$payload, $this->defaultHeaders());
+        $response->assertStatus(201);
+    }
+
+
+
 
 }

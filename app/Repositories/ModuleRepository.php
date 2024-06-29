@@ -21,7 +21,7 @@ class ModuleRepository
     {
         return $this->entity
             ->where('course_id', $identify)
-            // ->with('lessons.views')
+            ->with('lessons.views')
             ->with('lessons')
             ->get();
     }
